@@ -1,0 +1,196 @@
+﻿
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/dashboard.css" />
+</head>
+<body>
+   
+    <div class="container">
+        <h2 style="color: black"> Dashboard</h2>
+
+        <!-- Search Dropdown -->
+        <style>
+            
+            #programming-language {
+                font-family: Arial, sans-serif;
+            }
+
+                #programming-language option {
+                    font-family: Arial, sans-serif;
+                    color: black;
+                }
+        </style>
+
+        <div class="input-group">
+            <select class="form-control" id="programming-language">
+                <option value="All">All</option>
+                <option value="Java">Java</option>
+                <option value="Python">Python</option>
+                <option value="PHP">PHP</option>
+                <option value="HTML">HTML</option>
+            </select>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="search()">Search</button>
+            </span>
+        </div>
+
+        <!-- Widgets Section -->
+        <div class="widgets-section" id="widgets-section">
+            <!-- Java Widget Container -->
+            <div id="java-widget" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Java Widget</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="https://via.placeholder.com/120x120" class="widget-img" alt="Java Widget Image">
+                    <p>Description for Java Widget.</p>
+                    <div class="widget-buttons">
+                        <button class="btn btn-primary add-button" onclick="addToSession('Java')">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Python Widget Container -->
+            <div id="python-widget" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Python Widget</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="https://via.placeholder.com/120x120" class="widget-img" alt="Python Widget Image">
+                    <p>Description for Python Widget.</p>
+                    <div class="widget-buttons">
+                        <button class="btn btn-primary add-button" onclick="addToSession('Python')">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PHP Widget Container -->
+            <div id="php-widget" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">PHP Widget</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="https://via.placeholder.com/120x120" class="widget-img" alt="PHP Widget Image">
+                    <p>Description for PHP Widget.</p>
+                    <div class="widget-buttons">
+                        <button class="btn btn-primary add-button" onclick="addToSession('PHP')">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTML Widget Container -->
+            <div id="html-widget" class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">HTML Widget</h3>
+                </div>
+                <div class="panel-body">
+                    <img src="https://via.placeholder.com/120x120" class="widget-img" alt="HTML Widget Image">
+                    <p>Description for HTML Widget.</p>
+                    <div class="widget-buttons">
+                        <button class="btn btn-primary add-button" onclick="addToSession('HTML')">Add</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Next Page Button -->
+            <div class="next-page-button">
+                <button id="submit-button" class="btn btn-primary" onclick="submitWidgets()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Start Session Section -->
+        <div class="start-session" id="start-session">
+            <button class="btn btn-primary" onclick="showWidgets()">Back to Adding</button>
+            <h3>Start Session</h3>
+            <div id="session-content">
+                <!-- Added Sessions will appear here -->
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-danger" href="/Home/Login" onclick="logout()">Logout</button>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function search() {
+            var selectedLanguage = document.getElementById("programming-language").value;
+            // Show all widgets
+            document.getElementById("java-widget").style.display = "block";
+            document.getElementById("python-widget").style.display = "block";
+            document.getElementById("php-widget").style.display = "block";
+            document.getElementById("html-widget").style.display = "block";
+
+            // Hide widgets based on selected language (except "All")
+            if (selectedLanguage !== "All") {
+                if (selectedLanguage !== "Java") {
+                    document.getElementById("java-widget").style.display = "none";
+                }
+                if (selectedLanguage !== "Python") {
+                    document.getElementById("python-widget").style.display = "none";
+                }
+                if (selectedLanguage !== "PHP") {
+                    document.getElementById("php-widget").style.display = "none";
+                }
+                if (selectedLanguage !== "HTML") {
+                    document.getElementById("html-widget").style.display = "none";
+                }
+            }
+        }
+
+        function addToSession(language) {
+            var sessionContent = document.createElement("div");
+            sessionContent.className = "panel panel-default";
+            sessionContent.innerHTML = `
+                <div class="panel-heading">
+                    <h3 class="panel-title">${language} Widget</h3>
+                    <button class="btn btn-danger delete-button" onclick="deleteSession(this)">Delete</button>
+                </div>
+                <div class="panel-body">
+                    <img src="https://via.placeholder.com/120x120" class="session-img" alt="${language} Widget Image">
+                    <p>Description for ${language} Widget.</p>
+                    <div class="session-buttons">
+                        <button class="btn btn-info">Courses</button>
+                        <button class="btn btn-info">Reviews</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-warning">Pay First to Unlock</button>
+                    </div>
+                </div>
+            `;
+            document.getElementById("session-content").appendChild(sessionContent);
+        }
+
+        function deleteSession(button) {
+            // Remove the session panel containing the delete button
+            var sessionPanel = button.closest(".panel");
+            sessionPanel.remove();
+        }
+
+        function submitWidgets() {
+            // Hide the widgets section
+            document.getElementById("widgets-section").style.display = "none";
+            // Show the start session section
+            document.getElementById("start-session").style.display = "block";
+        }
+
+        function showWidgets() {
+            // Show the widgets section
+            document.getElementById("widgets-section").style.display = "block";
+            // Hide the start session section
+            document.getElementById("start-session").style.display = "none";
+        }
+        function logout() {
+            // Function code for logout
+            // Redirect to the logout action in the controller or any other logout functionality
+            window.location.href = "login";
+        }
+    </script>
+
+</body>
+</html>
