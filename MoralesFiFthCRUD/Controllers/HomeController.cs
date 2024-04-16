@@ -53,7 +53,15 @@ namespace MoralesFiFthCRUD.Controllers
         [HttpPost]
         public ActionResult Create(User u)
         {
+
             _userRepo.Create(u);
+            var userAdded = _userRepo._table.Where(m => m.username == u.username).FirstOrDefault();
+
+            var userRole = new UserRole();
+            userRole.userId = userAdded.id;
+            userRole.roleId = roleId;
+            _userRole.Create(userRole);
+
             TempData["Msg"] = $"User {u.username} added!";
 
             return RedirectToAction("Login");

@@ -10,10 +10,12 @@ namespace MoralesFiFthCRUD.Controllers
     {
         public database1Entities _db;
         public BaseRepository<User> _userRepo;
+        public BaseRepository<UserRole> _userRole;
         public BaseController()
         {
             _db = new database1Entities();
             _userRepo = new BaseRepository<User>();
+            _userRole = new BaseRepository<UserRole>();
         }
     }
 }
