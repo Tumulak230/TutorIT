@@ -248,3 +248,6 @@ C:\school projects\Sendings\MoralesFiFthCRUD\bin\System.Web.Mvc.xml
 C:\school projects\Sendings\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.csprojResolveAssemblyReference.cache
 C:\school projects\Sendings\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.dll
 C:\school projects\Sendings\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.pdb
+C:\school projects\Updates\TutorIT\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.csprojResolveAssemblyReference.cache
+C:\school projects\Updates\TutorIT\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.dll
+C:\school projects\Updates\TutorIT\MoralesFiFthCRUD\obj\Debug\MoralesFiFthCRUD.pdb
