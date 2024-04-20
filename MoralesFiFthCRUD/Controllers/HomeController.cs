@@ -7,11 +7,11 @@ using System.Web.Security;
 
 namespace MoralesFiFthCRUD.Controllers
 {
-    
+
     public class HomeController : BaseController
     {
         // GET: Home
-     
+
         public ActionResult Index()
         {
             return View(_userRepo.GetAll());
@@ -51,20 +51,45 @@ namespace MoralesFiFthCRUD.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(User u)
+        public ActionResult Create(User u, string SelectedRole)
         {
-
             _userRepo.Create(u);
-            var userAdded = _userRepo._table.Where(m => m.username == u.username).FirstOrDefault();
 
-            var userRole = new UserRole();
-            userRole.userId = userAdded.id;
-            userRole.roleId = roleId;
+            var userAdded = _userRepo._table.FirstOrDefault(m => m.username == u.username);
+
+            if (userAdded == null)
+            {
+                // Handle case where user creation failed
+                ModelState.AddModelError("", "Failed to create user.");
+                return View(u); // Redisplay the form with an error message
+            }
+
+            if (string.IsNullOrEmpty(SelectedRole))
+            {
+                // Handle case where role is not selected
+                ModelState.AddModelError("", "Role not selected.");
+                return View(u); // Redisplay the form with an error message
+            }
+
+            var role = _db.Roles.FirstOrDefault(r => r.roleName == SelectedRole);
+
+            if (role == null)
+            {
+                // Handle case where role is not found (invalid selection)
+                ModelState.AddModelError("", "Invalid role selected.");
+                return View(u); // Redisplay the form with an error message
+            }
+
+            var userRole = new UserRole
+            {
+                userId = userAdded.id,
+                roleId = role.id // Assign the retrieved roleId
+            };
+
             _userRole.Create(userRole);
 
             TempData["Msg"] = $"User {u.username} added!";
-
-            return RedirectToAction("Login");
+            return RedirectToAction("LandingPage");
         }
         [Authorize(Roles = "Tutor")]
         public ActionResult Details(int id)
@@ -97,7 +122,7 @@ namespace MoralesFiFthCRUD.Controllers
         {
             return View();
         }
-        
+
         public ActionResult Dashboard()
         {
             return View();
