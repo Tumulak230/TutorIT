@@ -131,6 +131,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\create.css" />
     <Content Include="Content\dashboard.css" />
+    <Content Include="Content\Home.css" />
     <Content Include="Content\login.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\style.css" />
@@ -235,6 +236,7 @@
     </Content>
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\ContactUs.cshtml" />
+    <Content Include="Views\Home\Shop.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

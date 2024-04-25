@@ -71,7 +71,7 @@ namespace MoralesFiFthCRUD.Controllers
                 return View(u); // Redisplay the form with an error message
             }
 
-            var role = _db.Roles.FirstOrDefault(r => r.roleName == SelectedRole);
+            var role = _db.Role.FirstOrDefault(r => r.roleName == SelectedRole);
 
             if (role == null)
             {
@@ -140,6 +140,10 @@ namespace MoralesFiFthCRUD.Controllers
             return View();
         }
         public ActionResult ContactUs()
+        {
+            return View();
+        }
+        public ActionResult Shop()
         {
             return View();
         }

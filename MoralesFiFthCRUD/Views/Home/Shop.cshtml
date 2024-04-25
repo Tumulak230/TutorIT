@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant Shop</title>
+    <style>
+        /* Reset default styles */
+        body, h1, h2, h3, p, ul, li {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #8bc34a; /* Change background color to green */
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+
+            nav ul li {
+                display: inline;
+                margin-right: 10px;
+            }
+
+        main {
+            padding: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .plant-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .plant-card {
+            width: 280px;
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+            .plant-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            }
+
+            .plant-card img {
+                width: 100%;
+                height: 180px;
+                object-fit: cover;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            .plant-card h3 {
+                font-size: 20px;
+                margin-bottom: 10px;
+            }
+
+            .plant-card p {
+                font-size: 16px;
+                color: #666;
+                margin-bottom: 10px;
+            }
+
+            .plant-card .category {
+                font-style: italic;
+                color: #888;
+            }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to our Plant Shop!</h1>
+        <nav>
+            <ul>
+                <li><a href="#indoor-plants">Indoor Plants</a></li>
+                <li><a href="#outdoor-plants">Outdoor Plants</a></li>
+                <li><a href="#succulents">Succulents</a></li>
+                <li><a href="#flowers">Flowers</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="indoor-plants">
+            <h2>Indoor Plants</h2>
+            <div class="plant-container">
+                <!-- Plant listings will be dynamically populated here -->
+            </div>
+        </section>
+
+        <!-- Other sections for Outdoor Plants, Succulents, and Flowers -->
+
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Plant Shop</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Sample data (replace with real data fetched from a backend)
+            const plantsData = [
+                {
+                    name: 'Peace Lily',
+                    category: 'Indoor Plants',
+                    image: 'https://via.placeholder.com/300',
+                    description: 'The Peace Lily is a popular indoor plant known for its beautiful white flowers.'
+                },
+                // Add more plant objects here...
+            ];
+
+            const plantContainer = document.querySelector('.plant-container');
+
+            // Function to display plants in the UI
+            function displayPlants(plants) {
+                plantContainer.innerHTML = '';
+                plants.forEach(plant => {
+                    const plantCard = document.createElement('div');
+                    plantCard.classList.add('plant-card');
+
+                    const img = document.createElement('img');
+                    img.src = plant.image;
+                    img.alt = plant.name;
+
+                    const name = document.createElement('h3');
+                    name.textContent = plant.name;
+
+                    const category = document.createElement('p');
+                    category.classList.add('category');
+                    category.textContent = plant.category;
+
+                    const description = document.createElement('p');
+                    description.textContent = plant.description;
+
+                    plantCard.appendChild(img);
+                    plantCard.appendChild(name);
+                    plantCard.appendChild(category);
+                    plantCard.appendChild(description);
+
+                    plantContainer.appendChild(plantCard);
+                });
+            }
+
+            // Initial display of indoor plants (you can add similar functions for other categories)
+            const indoorPlants = plantsData.filter(plant => plant.category === 'Indoor Plants');
+            displayPlants(indoorPlants);
+        });
+    </script>
+</body>
+</html>
